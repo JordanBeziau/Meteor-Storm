@@ -1,1 +1,33 @@
 * { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #77d7ea;
+}
+
+/****************************************************************
+    DECOR
+****************************************************************/
+.absolute {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.decor {
+  background-image: url('images/decor.jpg');
+}
+.decor-g {
+  background-image: url('images/decor_g.png');
+  background-repeat: repeat-y;
+  background-position: -200px 0;
+}
+.decor-d {
+  background-image: url('images/decor_d.png');
+  background-repeat: repeat-y;
+  background-position: calc(100% + 200px) 0;
+}
