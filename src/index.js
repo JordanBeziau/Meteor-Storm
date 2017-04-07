@@ -8,6 +8,9 @@ let decorPosY = 0,
 let meteorX,
   meteorY,
   meteorSpeed;
+// Tir laser
+let shot = false,
+  shotId = 0;
 // Clavier
 let touche = [];
 
@@ -34,7 +37,8 @@ $(document).ready(() => {
       $('#vaisseau').after('<div class="meteor" data-speed="" data-etat=""></div>');
     }
     $('.meteor').each(function () {
-      meteorX = Math.round(Math.random()*(clientX - 60)); // Positionnement X
+      meteorX = Math.round(Math.random()*(clientX - 260)); // Positionnement X
+      meteorX < 200 && (meteorX += 200);
       meteorY = 0;
       // Affichage
       $(this).css('left', `${meteorX}px`);
@@ -71,6 +75,17 @@ $(document).ready(() => {
     }
     !touche[37] && ($('#vaisseau').removeClass('gauche'));
     !touche[39] && ($('#vaisseau').removeClass('droite'));
+    // Gestion du TIR
+    if (touche[32] && !shot) {
+      $('#vaisseau').after(`<div class="laser" id="${shotId}"></div>`);
+      $(`.laser#${shotId}`).css('left', shipVX).css('bottom', `${shipVY + 25}px`);
+      shot = true;
+      shotId ++;
+      for (let i = 0; i < 20; i++) {
+        $(`.laser#${i}`).css('bottom', `${$(`.laser#${i}`).css('bottom') + 10}`);
+      }
+      setTimeout(() => { shot = false; }, 500);
+    }
 
     setTimeout(gameLoop, 10);
   };
